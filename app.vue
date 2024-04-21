@@ -3,7 +3,7 @@
 		<aside>
 			<div class="head">
 				<UAvatar src="https://avatars.githubusercontent.com/u/63263243?v=4" alt="José Gutiérrez" size="lg"/>
-				<h1>José Gutiérez</h1>
+				<a href="https://github.com/JMG3ND"><h1>José Gutiérez</h1></a>
 			</div>
 			<UVerticalNavigation :links="links" />
 		</aside>
@@ -48,9 +48,14 @@ aside, main{
 	padding: 2rem 2rem 0 2rem;
 }
 
+aside{
+	position: sticky;
+	top: 20px;
+}
+
 .screen{
 	width: 100vw;
-	height: 100vh;
+	max-height: 100vh;
 	display: grid;
 	grid-template-columns: 1fr 3fr;
 }
