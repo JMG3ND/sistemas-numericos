@@ -6,7 +6,9 @@
             <template #header>
                 <h2>
                     Convertir de
-                    <USelectMenu/> a <USelectMenu/>
+                    <USelectMenu v-model="selectedI" :options="options"/> 
+                    a 
+                    <USelectMenu v-model="selectedF" :options="options"/>
                 </h2>
             </template>
             <div>
@@ -18,6 +20,14 @@
 
 <script setup>
 const value = ref('');
+
+const options = ["Binario","Octal","Decimal","Hexadecimal"];
+const selectedI = ref(options[0]);
+const selectedF = ref(options[1]);
+
+watch(value, async (newQ, oldQ) => {
+    //Escribir aquí la lógica para hacer cada una de las conversiones
+})
 </script>
 
 <style scoped>
@@ -30,7 +40,6 @@ const value = ref('');
 
 .card {
     height:80%;
-
     h2{
         display: flex;
         gap: 1rem;

@@ -147,7 +147,7 @@ const items = [{
 },{
     slot:"sistemaHexadecimal",
     label:"Hexadecimal"
-}]
+}];
 </script>
 
 <style scoped>
