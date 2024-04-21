@@ -37,7 +37,7 @@ const links = [{
 }];
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 *,*::after,*::before{
 	margin: 0;
 	padding: 0;
@@ -48,6 +48,10 @@ aside, main{
 	padding: 2rem 2rem 0 2rem;
 }
 
+main{
+	height: 100%;
+}
+
 aside{
 	position: sticky;
 	top: 20px;
@@ -55,6 +59,7 @@ aside{
 
 .screen{
 	width: 100vw;
+	height: 100vh;
 	max-height: 100vh;
 	display: grid;
 	grid-template-columns: 1fr 3fr;

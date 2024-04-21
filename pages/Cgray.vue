@@ -1,3 +1,3 @@
 <template>
-    <h1>Código Gray</h1>
+    <h1 style="font-size: x-large;">Código Gray</h1>
 </template>

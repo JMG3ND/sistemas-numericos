@@ -5,7 +5,12 @@
             <template #sistemaBinario="{items}">
                 <UCard>
                     <template #header>
-                        <h2>Sistema Binario <UKbd value="0 1" /></h2>
+                        <h2>
+                            Sistema Binario 
+                            <div>
+                                <UKbd v-for="index in [0,1]" :value=index />
+                            </div>
+                        </h2>
                     </template>
                     <div class="card_content">
                         <p>
@@ -45,7 +50,14 @@
 
             <template #sistemaOctal="{items}">
                 <UCard>
-                    <template #header><h2>Sistema Octal <UKbd value="0 1 2 3 4 5 6 7" /></h2></template>
+                    <template #header>
+                        <h2>
+                            Sistema Octal
+                            <div>
+                                <UKbd v-for="index in [0,1,2,3,4,5,6,7]" :value=index />
+                            </div>
+                        </h2>
+                    </template>
                     <div class="card_content">
                         <p>El sistema octal, también conocido como base-8, es un sistema numérico que utiliza 8 dígitos diferentes para representar valores. Estos dígitos son 0, 1, 2, 3, 4, 5, 6 y 7. Funciona de manera similar al sistema decimal (base-10), pero en lugar de agrupar los dígitos en grupos de diez, los agrupa en grupos de ocho.</p>
                         <p>En el sistema octal, cada posición en un número tiene un valor que es una potencia de 8. Por ejemplo, en el número 347 en sistema octal, el dígito "7" está en la posición de las unidades, el dígito "4" está en la posición de los ochos (8), y el dígito "3" está en la posición de los 64 (8<sup>2</sup>). Entonces, el valor del número octal 347 en decimal sería:</p>
@@ -63,7 +75,12 @@
             <template #sistemaDecimal="{items}">
                 <UCard>
                     <template #header>
-                        <h2>Sistema Decimal <UKbd value="0 1 2 3 4 5 6 7 8 9" /></h2>
+                        <h2>
+                            Sistema Decimal 
+                            <div>
+                                <UKbd v-for="index in [0,1,2,3,4,5,6,7,8,9]" :value=index />
+                            </div>
+                        </h2>
                     </template>
                     <div class="card_content">
                         <p>
@@ -95,7 +112,14 @@
 
             <template #sistemaHexadecimal="{items}">
                 <UCard>
-                    <template #header><h2>Sistema Hexadecimal <UKbd value="0 1 2 3 4 5 6 7 8 9 A B C D E F" /></h2></template>
+                    <template #header>
+                        <h2>
+                            Sistema Hexadecimal 
+                            <div>
+                                <UKbd v-for="index in '123456789ABCDEF'" :value=index />
+                            </div>
+                        </h2>
+                    </template>
                     <div class="card_content">
                         <p>El sistema hexadecimal es un sistema numérico que utiliza 16 símbolos para representar valores. Estos símbolos son los dígitos del 0 al 9 y las letras A, B, C, D, E, y F. Cada símbolo tiene un valor decimal asociado: del 0 al 9 representan los valores decimales normales, mientras que las letras representan los valores del 10 al 15. Por lo tanto, en el sistema hexadecimal, el valor de cada posición se calcula multiplicando el valor del símbolo por 16 elevado a la potencia de su posición.</p>
                         <p>Por ejemplo, el número hexadecimal "2A3" se calcula como:</p>
@@ -137,5 +161,10 @@ h2{
     width: 100%;
     display: flex;
     justify-content: space-between;
+
+    div{
+        display: flex;
+        gap:0.5rem;
+    }
 }
 </style>

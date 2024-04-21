@@ -1,3 +1,3 @@
 <template>
-    <h1>Multiplicación Binaria</h1>
+    <h1 style="font-size: x-large;">Multiplicación Binaria</h1>
 </template>

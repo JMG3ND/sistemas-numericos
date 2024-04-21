@@ -1,3 +1,3 @@
 <template>
-    <h1>Código Hamming</h1>
+    <h1 style="font-size: x-large;">Código Hamming</h1>
 </template>
