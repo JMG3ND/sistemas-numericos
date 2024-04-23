@@ -2,8 +2,17 @@
 	<div class="screen">
 		<aside>
 			<div class="head">
-				<UAvatar src="https://avatars.githubusercontent.com/u/63263243?v=4" alt="José Gutiérrez" size="lg"/>
-				<a href="https://github.com/JMG3ND"><h1>José Gutiérez</h1></a>
+				<div class="name">
+					<UAvatar src="https://avatars.githubusercontent.com/u/63263243?v=4" alt="José Gutiérrez" size="lg"/>
+					<a href="https://github.com/JMG3ND"><h1>José Gutiérez</h1></a>
+				</div>
+				<UButton
+					:icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
+					color="gray"
+					variant="ghost"
+					aria-label="Theme"
+					@click="isDark = !isDark"
+				/>
 			</div>
 			<UVerticalNavigation :links="links" />
 		</aside>
@@ -35,6 +44,16 @@ const links = [{
 	to:"/Chamming",
 	icon:"i-heroicons-code-bracket-square"
 }];
+
+const colorMode = useColorMode()
+const isDark = computed({
+  get () {
+    return colorMode.value === 'dark';
+  },
+  set () {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -65,8 +84,15 @@ aside{
 	grid-template-columns: 1fr 3fr;
 }
 
-.head{
+.head {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
 	padding-bottom: 2rem;
+}
+
+.name{
 	display: flex;
 	width: 100%;
 	gap: 1rem;
