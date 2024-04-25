@@ -110,7 +110,8 @@ const conversion = (newQ = value.value) => {
             }
             break;
         case options[3]:
-            if(/^[0123456789ABCDEF]*$/.test(newQ)){
+            newQ = newQ.toUpperCase();
+            if(/^[0123456789ABCDEFabcdef]*$/.test(newQ)){
                 const hexdec = convertirADecimal(newQ, 16);
                 switch(selectedF.value){
                     case options[0]:
