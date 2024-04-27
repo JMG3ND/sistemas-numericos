@@ -20,6 +20,7 @@
 </template>
 
 <script setup>
+import {convertirABase, convertirADecimal} from '@/composables/conversiones_numericas.js'
 
 const value = ref('');
 const res = ref('0');
@@ -28,26 +29,6 @@ const options = ["Binario","Octal","Decimal","Hexadecimal"];
 const selectedI = ref(options[0]);
 const selectedF = ref(options[1]);
 
-const convertirADecimal = (str, base) => {
-    const array = [];
-    const char = '0123456789ABCDEF';
-    let decimal = 0;
-    str.split('').forEach(val => array.push(char.split('').findIndex(i => i==val)));
-    array.reverse().forEach((val, index) => {
-        decimal += Math.pow(base,index) * val;
-    })
-    return decimal;
-}
-const convertirABase = (decimal, base) => {
-    const array = [];
-    const valores = '0123456789ABCDEF';
-    array.push(valores.at(decimal%base));
-    while(Math.floor(decimal/base) > 0){
-        decimal = Math.floor(decimal/base);
-        array.push(valores.at(decimal%base));
-    }
-    return array.reverse().join('');
-}
 const conversion = (newQ = value.value) => {
     switch (selectedI.value) {
         case options[0]:
