@@ -1,11 +1,5 @@
 <template>
-    <h1 style="font-size: x-large;">Multiplicación Binaria</h1>
+    <div>
+        <h1 style="font-size: x-large;">Multiplicación Binaria</h1>
+    </div>
 </template>
-
-<script setup>
-
-</script>
-
-<style lang="scss">
-
-</style>
