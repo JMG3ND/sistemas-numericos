@@ -17,7 +17,7 @@ const ui = {
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
 .box{
-  width: 75px;
+  min-width: 75px;
   height: 75px;
   padding: 0 1rem;
   margin: 0 0.25rem;

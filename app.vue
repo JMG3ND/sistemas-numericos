@@ -24,7 +24,7 @@
 
 <script setup>
 const links = [{
-	label:"Sistemas Numericos",
+	label:"Sistemas Numéricos",
 	to:"/",
 	icon:"i-heroicons-home"
 },{
