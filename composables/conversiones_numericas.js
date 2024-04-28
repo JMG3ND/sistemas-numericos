@@ -1,3 +1,5 @@
+//Función que recibe un número como cadena de texto y lo transforma a decimal según
+//la base que se le otorgue
 const convertirADecimal = (str, base) => {
     const array = [];
     const char = '0123456789ABCDEF';
@@ -9,6 +11,8 @@ const convertirADecimal = (str, base) => {
     return decimal;
 }
 
+//Función que convierte un número decimal a cualquier sistema numérico según la base
+//que se le otorgue por parámetro
 const convertirABase = (decimal, base) => {
     const array = [];
     const valores = '0123456789ABCDEF';

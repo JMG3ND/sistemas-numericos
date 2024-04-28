@@ -3,12 +3,17 @@
     <h1 style="font-size: x-large">Conversión entre Sistemas</h1>
     <UCard class="card">
       <template #header>
-        <h2 class="card__title">
-          Convertir de
-          <USelectMenu v-model="selectedI" :options="options" />
-          a
-          <USelectMenu v-model="selectedF" :options="options" />
-        </h2>
+        <div class="header">
+          <h2 class="card__title">
+            Convertir de
+            <USelectMenu v-model="selectedI" :options="options" />
+            a
+            <USelectMenu v-model="selectedF" :options="options" />
+          </h2>
+          <div>
+            <UButton label="Código" @click="showModal = true" />
+          </div>
+        </div>
       </template>
       <div class="card__ress">
         <div style="display: inline-block; padding-bottom: 1rem">
@@ -17,7 +22,9 @@
         <div class="card__ress_container">
           <Box v-if="error">El valor debe ser de tipo {{ errortype }}</Box>
           <div v-if="!error && res" class="card__box_container">
-            <Box>Conversión n<sub>{{ baseConversion }}</sub></Box>
+            <Box
+              >Conversión n<sub>{{ baseConversion }}</sub></Box
+            >
             <div class="card__box_container__child">
               <div style="display: flex">
                 <Box v-for="(char, sup = 8) in res.toString()">{{ char }}</Box>
@@ -32,6 +39,11 @@
         </div>
       </div>
     </UCard>
+    <UModal v-model="showModal">
+      <code>
+        
+      </code>
+    </UModal>
   </div>
 </template>
 
@@ -46,6 +58,7 @@ const res = ref("0");
 const error = ref(false);
 const errortype = ref("");
 const baseConversion = ref("8");
+const showModal = ref(false);
 
 const options = ["Binario", "Octal", "Decimal", "Hexadecimal"];
 const selectedI = ref(options[0]);
@@ -166,5 +179,10 @@ watch(selectedF, async () => conversion());
       gap: 1rem;
     }
   }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
