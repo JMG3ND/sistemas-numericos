@@ -7,7 +7,7 @@
 					<a href="https://github.com/JMG3ND"><h1>José Gutiérez</h1></a>
 				</div>
 				<UButton
-					:icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
+					:icon="() => isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
 					color="gray"
 					variant="ghost"
 					aria-label="Theme"
