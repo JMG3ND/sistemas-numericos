@@ -1,24 +1,37 @@
 <template>
-  <div>
-    <h1>Hods</h1>
-    <div class="gaping">
-      <h1 style="font-size: x-large">Conversión entre Sistemas</h1>
-
-      <UCard class="card">
-        <template #header>
-          <h2>
-            Convertir de
-            <USelectMenu v-model="selectedI" :options="options" />
-            a
-            <USelectMenu v-model="selectedF" :options="options" />
-          </h2>
-        </template>
-        <div class="ress">
+  <div class="gaping">
+    <h1 style="font-size: x-large">Conversión entre Sistemas</h1>
+    <UCard class="card">
+      <template #header>
+        <h2 class="card__title">
+          Convertir de
+          <USelectMenu v-model="selectedI" :options="options" />
+          a
+          <USelectMenu v-model="selectedF" :options="options" />
+        </h2>
+      </template>
+      <div class="card__ress">
+        <div style="display: inline-block; padding-bottom: 1rem">
           <UInput size="xl" v-model="value" placeholder="Valor..." />
-          <h1 style="font-size: xx-large">{{ res }}</h1>
         </div>
-      </UCard>
-    </div>
+        <div class="card__ress_container">
+          <Box v-if="error">El valor debe ser de tipo {{ errortype }}</Box>
+          <div v-if="!error && res" class="card__box_container">
+            <Box>Conversión n<sub>{{ baseConversion }}</sub></Box>
+            <div class="card__box_container__child">
+              <div style="display: flex">
+                <Box v-for="(char, sup = 8) in res.toString()">{{ char }}</Box>
+              </div>
+              <div style="display: flex; flex-direction: row-reverse">
+                <Box v-for="(sup, i) in res">
+                  {{ baseConversion }}<sup>{{ i }}</sup>
+                </Box>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </UCard>
   </div>
 </template>
 
@@ -30,91 +43,74 @@ import {
 
 const value = ref("");
 const res = ref("0");
+const error = ref(false);
+const errortype = ref("");
+const baseConversion = ref("8");
 
 const options = ["Binario", "Octal", "Decimal", "Hexadecimal"];
 const selectedI = ref(options[0]);
 const selectedF = ref(options[1]);
 
+const switchF = (decimal) => {
+  let base;
+  switch (selectedF.value) {
+    case options[0]:
+      base = 2;
+      break;
+    case options[1]:
+      base = 8;
+      break;
+    case options[2]:
+      base = 10;
+      break;
+    case options[3]:
+      base = 16;
+      break;
+  }
+  baseConversion.value = base;
+  res.value = convertirABase(decimal, base);
+};
+
 const conversion = (newQ = value.value) => {
   switch (selectedI.value) {
     case options[0]:
       if (/^[01]*$/.test(newQ)) {
+        error.value = false;
         const binariodecimal = convertirADecimal(newQ, 2);
-        switch (selectedF.value) {
-          case options[1]:
-            res.value = convertirABase(binariodecimal, 8);
-            break;
-          case options[2]:
-            res.value = binariodecimal;
-            break;
-          case options[3]:
-            res.value = convertirABase(binariodecimal, 16);
-            break;
-          default:
-            res.value = newQ;
-        }
+        switchF(binariodecimal);
       } else {
-        res.value = "LA ENTRADA DEBE SER UN VALOR BINARIO";
+        error.value = true;
+        errortype.value = options[0];
       }
       break;
     case options[1]:
       if (/^[01234567]*$/.test(newQ)) {
+        error.value = false;
         const octaldecimal = convertirADecimal(newQ, 8);
-        switch (selectedF.value) {
-          case options[0]:
-            res.value = convertirABase(octaldecimal, 8);
-            break;
-          case options[2]:
-            res.value = octaldecimal;
-            break;
-          case options[3]:
-            res.value = convertirABase(octaldecimal, 16);
-            break;
-          default:
-            res.value = newQ;
-        }
+        switchF(octaldecimal);
       } else {
-        res.value = "LA ENTRADA DEBE SER UN VALOR OCTAL";
+        error.value = true;
+        errortype.value = options[1];
       }
       break;
     case options[2]:
       if (/^[0123456789]*$/.test(newQ)) {
-        switch (selectedF.value) {
-          case options[0]:
-            res.value = convertirABase(newQ, 2);
-            break;
-          case options[1]:
-            res.value = convertirABase(newQ, 8);
-            break;
-          case options[3]:
-            res.value = convertirABase(newQ, 16);
-            break;
-          default:
-            res.value = newQ;
-        }
+        error.value = false;
+        switchF(parseInt(newQ));
       } else {
-        res.value = "LA ENTRADA TIEN QUE SER UN VALOR DECIMAL";
+        error.value = true;
+        errortype.value = options[2];
       }
       break;
     case options[3]:
       newQ = newQ.toUpperCase();
       if (/^[0123456789ABCDEF]*$/.test(newQ)) {
+        error.value = false;
         const hexdec = convertirADecimal(newQ, 16);
-        switch (selectedF.value) {
-          case options[0]:
-            res.value = convertirABase(hexdec, 2);
-            break;
-          case options[1]:
-            res.value = convertirABase(hexdec, 8);
-            break;
-          case options[2]:
-            res.value = hexdec;
-            break;
-          default:
-            res.value = newQ;
-        }
+        switchF(hexdec);
       } else {
-        res.value = "LA ENTRADA TIEN QUE SER UN VALOR HEXADECIMAL";
+        error.value = true;
+        errortype.value = options[3];
       }
       break;
   }
@@ -135,18 +131,40 @@ watch(selectedF, async () => conversion());
 
 .card {
   height: 80%;
-  h2 {
+
+  &__title {
     display: flex;
     gap: 1rem;
   }
-}
 
-.ress {
-  height: 100%;
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  &__ress_container {
+    display: flex;
+    justify-content: center;
+
+    > div {
+      padding: 0.6rem;
+    }
+  }
+
+  &__ress {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &__box_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    &__child {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
 }
 </style>

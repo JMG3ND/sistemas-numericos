@@ -17,14 +17,15 @@ const ui = {
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
 .box{
-  min-width: 75px;
-  height: 75px;
+  min-width: 80px;
+  height: 80px;
   padding: 0 1rem;
   margin: 0 0.25rem;
   border-radius: 10px;
   font-size: 50px;
-  text-align: center;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   font-family: "Jersey 10", sans-serif;
   font-weight: 400;
