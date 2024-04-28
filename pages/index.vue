@@ -75,34 +75,10 @@
               </h2>
             </template>
             <div class="card_content">
+              <ContentDoc path="/hexadecimal/p1" />
               <Box>Ejemplos de números Hexadecimales</Box>
               <Contador variacion="4294967295" base="16" />
-              <p>
-                El sistema hexadecimal es un sistema numérico que utiliza 16
-                símbolos para representar valores. Estos símbolos son los
-                dígitos del 0 al 9 y las letras A, B, C, D, E, y F. Cada símbolo
-                tiene un valor decimal asociado: del 0 al 9 representan los
-                valores decimales normales, mientras que las letras representan
-                los valores del 10 al 15. Por lo tanto, en el sistema
-                hexadecimal, el valor de cada posición se calcula multiplicando
-                el valor del símbolo por 16 elevado a la potencia de su
-                posición.
-              </p>
-              <p>Por ejemplo, el número hexadecimal "2A3" se calcula como:</p>
-              <p>
-                (2 * 16<sup>2</sup>) + (A * 16<sup>1</sup>) + (3 *
-                16<sup>0</sup>)
-              </p>
-              <p>Donde "A" tiene un valor de 10 en decimal.</p>
-              <p>
-                El sistema hexadecimal es ampliamente utilizado en informática
-                debido a su capacidad para representar fácilmente grandes
-                valores binarios de manera más compacta y legible. En
-                particular, cada dígito hexadecimal equivale a cuatro bits (un
-                nibble), lo que hace que la conversión entre binario y
-                hexadecimal sea bastante simple. Esto es especialmente útil en
-                la programación y el diseño de hardware.
-              </p>
+              <ContentDoc path="/hexadecimal/p2" />
             </div>
           </UCard>
         </template>
