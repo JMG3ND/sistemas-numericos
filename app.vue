@@ -7,11 +7,11 @@
 					<a href="https://github.com/JMG3ND"><h1>José Gutiérez</h1></a>
 				</div>
 				<UButton
-					:icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
+					:icon="dark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
 					color="gray"
 					variant="ghost"
 					aria-label="Theme"
-					@click="isDark = !isDark"
+					@click="isDark = !isDark; dark = !dark"
 				/>
 			</div>
 			<UVerticalNavigation :links="links" />
@@ -45,7 +45,8 @@ const links = [{
 	icon:"i-heroicons-code-bracket-square"
 }];
 
-const colorMode = useColorMode()
+const colorMode = useColorMode();
+const dark = ref(true);
 const isDark = computed({
   get () {
     return colorMode.value === 'dark';

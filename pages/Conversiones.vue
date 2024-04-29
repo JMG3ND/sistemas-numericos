@@ -40,9 +40,9 @@
       </div>
     </UCard>
     <UModal v-model="showModal">
-      <code>
-        
-      </code>
+      <div style="padding: 1rem;">
+        <img style="border-radius: 10px;" src="/public/codigo-conversiones.png" />
+      </div>
     </UModal>
   </div>
 </template>
