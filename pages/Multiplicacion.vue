@@ -2,6 +2,18 @@
   <div>
     <h1 class="header">Multiplicación Binaria</h1>
     <UCard class="card">
+      <template #header>
+        <div class="card__header">
+          <Box>Operación N<sub>10</sub></Box>
+          <div class="card__header__decresult">
+            <Box>{{ convertirADecimal(num1.join(''), 2) }}</Box>
+            <Box>{{ operacion }}</Box>
+            <Box>{{ convertirADecimal(num2.join(''), 2) }}</Box>
+            <Box>=</Box>
+            <Box>{{ convertirADecimal(result, 2) }}</Box>
+          </div>
+        </div>
+      </template>
       <div class="card__entrada">
         <div class="card__entrada__num">
           <div
@@ -28,13 +40,15 @@
         </div>
       </div>
       <div class="card__salida">
-          <Box >{{ result }}</Box>
+        <Box>{{ result }}</Box>
       </div>
     </UCard>
   </div>
 </template>
 
 <script setup>
+import {convertirADecimal} from '@/composables/conversiones_numericas.js'
+
 const array = new Array(8).fill(0);
 const num1 = ref([...array]);
 const num2 = ref([...array]);
@@ -53,33 +67,46 @@ function sumaBinaria(array1, array2) {
   for (let i = array1.length - 1; i >= 0; i--) {
     const A = array1[i];
     const B = array2[i];
-    const v = XOR(A, B);
-    const F = XOR(v, carry);
-    carry = (v && carry) || (A && B);
+    const F = XOR(XOR(A, B), carry); // F = (AB' + A'B) + C
+    carry = (XOR(A, B) && carry) || (A && B); // carry = (AB' + A'B)C + AB
     resSum.push(F * 1);
   }
   resSum.push(carry);
   return resSum;
 }
+
 function restaBinaria(array1, array2) {
   const resRes = [];
   let C = 0;
+  let a1 = [...array1];
+  let a2 = [...array2];
+  const index = a1.findIndex((v) => v != 0);
+  a1 = a1.slice(index);
+  a2 = a2.slice(index);
 
-  for(let i = array1.length - 1; i >= 0; i--){
-    const A = array1[i];
-    const B = array2[i];
+  for (let i = a1.length - 1; i >= 0; i--) {
+    const A = a1[i];
+    const B = a2[i];
 
-    const s1 = XOR(A, B);
-    const D = XOR(s1, C);
-    const s2 = !A && B;
-    const s3 = !s1 && C;
-
-    C = s2 || s3;
+    const D = XOR(XOR(A, B), C);
+    C = (!XOR(A, B) && C) || (!A && B);
 
     resRes.push(D * 1);
   }
-
   return resRes;
+}
+
+function multiplicacionBinaria(array1, array2) {
+  let a1 = [...array1];
+  a1 = a1.slice(a1.findIndex(v => v!= 0));
+  let a2 = [...array2];
+  a2 = a2.slice(a2.findIndex(v => v!= 0));
+
+  
+
+  const multRes = [];
+
+  return multRes;
 }
 
 function operar(array1, array2, operador) {
@@ -92,13 +119,13 @@ function operar(array1, array2, operador) {
       respuesta = restaBinaria(array1, array2);
       break;
     case "x":
-      
+      respuesta = multiplicacionBinaria(array1, array2);
       break;
     case "/":
   }
   return respuesta
     .reverse()
-    .slice(respuesta.findIndex(v => v !== 0))
+    .slice(respuesta.findIndex((v) => v !== 0))
     .join("");
 }
 </script>
@@ -113,6 +140,14 @@ function operar(array1, array2, operador) {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    &__decresult {
+      display: flex;
+    }
+  }
 
   &__entrada {
     display: flex;
