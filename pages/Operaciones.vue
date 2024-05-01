@@ -97,8 +97,8 @@ function sumaBinaria(array1, array2) {
     carry = (XOR(A, B) && carry) || (A && B); // carry = (AB' + A'B)C + AB
     resSum.push(F * 1);
   }
-  resSum.push(carry);
-  return resSum.reverse();
+  resSum.unshift(carry);
+  return resSum;
 }
 //Resta binaria usando compuertas lóicas de electrónica
 function restaBinaria(array1, array2) {
