@@ -23,14 +23,18 @@
       </template>
       <div class="card__entrada">
         <div class="card__entrada__num shadow-red">
-          <div
-            @click="alternar(num1, i)"
-            class="card__entrada__box"
-            :class="num == 1 ? `text-on` : ``"
+          <UTooltip
+            :text="Math.pow(2, num1.length - i - 1).toString()"
             v-for="(num, i) in num1"
           >
-            <Box>{{ num }}</Box>
-          </div>
+            <div
+              @click="alternar(num1, i)"
+              class="card__entrada__box"
+              :class="num == 1 ? `text-on` : ``"
+            >
+              <Box>{{ num }}</Box>
+            </div>
+          </UTooltip>
         </div>
         <div class="card__entrada__signo">
           <div @click="iop++" class="card__entrada__box">
@@ -40,14 +44,18 @@
           </div>
         </div>
         <div class="card__entrada__num shadow-blue">
-          <div
-            @click="alternar(num2, i)"
-            class="card__entrada__box"
-            :class="num == 1 ? `text-on` : ``"
+          <UTooltip
+            :text="Math.pow(2, num2.length - i - 1).toString()"
             v-for="(num, i) in num2"
           >
-            <Box>{{ num }}</Box>
-          </div>
+            <div
+              @click="alternar(num2, i)"
+              class="card__entrada__box"
+              :class="num == 1 ? `text-on` : ``"
+            >
+              <Box>{{ num }}</Box>
+            </div>
+          </UTooltip>
         </div>
       </div>
       <div class="card__salida">
@@ -56,7 +64,7 @@
     </UCard>
   </div>
   <UModal v-model="isOpen">
-    <CodeOperation/>
+    <CodeOperation />
   </UModal>
 </template>
 
@@ -110,9 +118,9 @@ function restaBinaria(array1, array2) {
     const D = XOR(XOR(A, B), C);
     C = (!XOR(A, B) && C) || (!A && B);
 
-    resRes.push(D * 1);
+    resRes.unshift(D * 1);
   }
-  return resRes.reverse();
+  return resRes;
 }
 
 //Multiplicación Binaria entre dos números
