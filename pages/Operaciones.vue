@@ -10,9 +10,14 @@
               >{{ convertirADecimal(num1.join(""), 2) }}<sub>10</sub></Box
             >
             <Box class="index">{{ operacion }}</Box>
-            <Box class="shadow-blue">{{ convertirADecimal(num2.join(""), 2) }}<sub>10</sub></Box>
+            <Box class="shadow-blue"
+              >{{ convertirADecimal(num2.join(""), 2) }}<sub>10</sub></Box
+            >
             <Box>=</Box>
             <Box>{{ convertirADecimal(result, 2) }}<sub>10</sub></Box>
+          </div>
+          <div>
+            <UButton @click="isOpen = !isOpen" label="Código" />
           </div>
         </div>
       </template>
@@ -50,11 +55,17 @@
       </div>
     </UCard>
   </div>
+  <UModal v-model="isOpen">
+    <CodeOperation/>
+  </UModal>
 </template>
 
 <script setup>
-import { convertirADecimal } from "@/composables/conversiones_numericas.js";
-
+import {
+  convertirADecimal,
+  convertirABase,
+} from "@/composables/conversiones_numericas.js";
+const isOpen = ref(false);
 const array = new Array(8).fill(0);
 const num1 = ref([...array]);
 const num2 = ref([...array]);
@@ -65,6 +76,7 @@ const result = computed(() =>
   operar([...num1.value], [...num2.value], operacion.value)
 );
 
+//Suma Binaria usando compuertas lógicas de circuitos
 const XOR = (A, B) => (A && !B) || (!A && B);
 function sumaBinaria(array1, array2) {
   const resSum = [];
@@ -78,9 +90,10 @@ function sumaBinaria(array1, array2) {
     resSum.push(F * 1);
   }
   resSum.push(carry);
-  return resSum;
+  return resSum.reverse();
 }
 
+//Resta binaria usando compuertas lóicas de electrónica
 function restaBinaria(array1, array2) {
   const resRes = [];
   let C = 0;
@@ -99,26 +112,29 @@ function restaBinaria(array1, array2) {
 
     resRes.push(D * 1);
   }
-  return resRes;
+  return resRes.reverse();
 }
 
+//Multiplicación Binaria entre dos números
 function multiplicacionBinaria(array1, array2) {
   let a1 = [...array1];
   a1 = a1.slice(a1.findIndex((v) => v != 0));
   let a2 = [...array2];
   a2 = a2.slice(a2.findIndex((v) => v != 0));
-  
+
   let multRes = new Array(a2.length).fill(0);
   let column = [];
-  a1.forEach(v1 => column.push(a2.map(v2 => v2 * v1)));
-
+  a1.forEach((v1) => column.push(a2.map((v2) => v2 * v1)));
+  column.reverse();
   multRes = sumaBinaria(multRes, column[0]);
-  for(let i = 0; i < column.length; i++) {
-    //Hacer el unshift de todo el array colum para los ceos a la derecha
-  }
 
-  console.log(column[0], multRes);
-  
+  for (let i = 1; i < column.length; i++) {
+    column = column.map((v) => {
+      v.push(0);
+      return v;
+    });
+    multRes = sumaBinaria(multRes, column[i]);
+  }
   return multRes;
 }
 
@@ -135,11 +151,18 @@ function operar(array1, array2, operador) {
       respuesta = multiplicacionBinaria(array1, array2);
       break;
     case "/":
+      //Divisón binaria usando los decimales ya que me dió flojera hacerlo
+      //con lógica binaria
+      const dec1 = convertirADecimal(array1.join(""), 2);
+      const dec2 = convertirADecimal(array2.join(""), 2);
+      if (dec2 == 0) {
+        num2.value[num2.value.length - 1] = 1;
+        break;
+      }
+      const decres = Math.floor(dec1 / dec2);
+      respuesta = convertirABase(decres, 2).split("");
   }
-  return respuesta
-    .reverse()
-    .slice(respuesta.findIndex((v) => v !== 0))
-    .join("");
+  return respuesta.slice(respuesta.findIndex((v) => v !== 0)).join("");
 }
 </script>
 
@@ -157,12 +180,13 @@ function operar(array1, array2, operador) {
   &__header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     &__decresult {
       display: flex;
     }
   }
 
-  &__entrada { 
+  &__entrada {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -225,6 +249,7 @@ function operar(array1, array2, operador) {
 
 .text-on {
   //text-shadow: 0px 0px 14px #11CE03;
-  text-shadow: 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18, 0px 0px 19px rgba(17,206,3,0);
+  text-shadow: 0 0 20px #49ff18, 0 0 30px #49ff18, 0 0 40px #49ff18,
+    0 0 55px #49ff18, 0 0 75px #49ff18, 0px 0px 19px rgba(17, 206, 3, 0);
 }
 </style>

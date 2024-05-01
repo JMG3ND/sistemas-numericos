@@ -36,7 +36,7 @@ function changeNumber() {
     if(props.base == 10){
       result.value = array;
     } else result.value = array.reverse();
-  }, 2000);
+  }, 1000);
 }
 
 onMounted(changeNumber);
