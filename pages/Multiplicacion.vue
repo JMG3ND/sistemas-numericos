@@ -1,24 +1,27 @@
 <template>
   <div>
-    <h1 class="header">Multiplicación Binaria</h1>
+    <h1 class="header">Operaciones Binaria</h1>
     <UCard class="card">
       <template #header>
         <div class="card__header">
-          <Box>Operación N<sub>10</sub></Box>
+          <Box>N<sub>10</sub> →</Box>
           <div class="card__header__decresult">
-            <Box>{{ convertirADecimal(num1.join(''), 2) }}</Box>
-            <Box>{{ operacion }}</Box>
-            <Box>{{ convertirADecimal(num2.join(''), 2) }}</Box>
+            <Box class="shadow-red"
+              >{{ convertirADecimal(num1.join(""), 2) }}<sub>10</sub></Box
+            >
+            <Box class="index">{{ operacion }}</Box>
+            <Box class="shadow-blue">{{ convertirADecimal(num2.join(""), 2) }}<sub>10</sub></Box>
             <Box>=</Box>
-            <Box>{{ convertirADecimal(result, 2) }}</Box>
+            <Box>{{ convertirADecimal(result, 2) }}<sub>10</sub></Box>
           </div>
         </div>
       </template>
       <div class="card__entrada">
-        <div class="card__entrada__num">
+        <div class="card__entrada__num shadow-red">
           <div
             @click="alternar(num1, i)"
             class="card__entrada__box"
+            :class="num == 1 ? `text-on` : ``"
             v-for="(num, i) in num1"
           >
             <Box>{{ num }}</Box>
@@ -26,13 +29,16 @@
         </div>
         <div class="card__entrada__signo">
           <div @click="iop++" class="card__entrada__box">
-            <Box>{{ operacion }}</Box>
+            <Box class="shadow-red">A<sub>2</sub></Box>
+            <Box class="index">{{ operacion }}</Box>
+            <Box class="shadow-blue">B<sub>2</sub></Box>
           </div>
         </div>
-        <div class="card__entrada__num">
+        <div class="card__entrada__num shadow-blue">
           <div
             @click="alternar(num2, i)"
             class="card__entrada__box"
+            :class="num == 1 ? `text-on` : ``"
             v-for="(num, i) in num2"
           >
             <Box>{{ num }}</Box>
@@ -40,14 +46,14 @@
         </div>
       </div>
       <div class="card__salida">
-        <Box>{{ result }}</Box>
+        <Box>{{ result }}<sub>2</sub></Box>
       </div>
     </UCard>
   </div>
 </template>
 
 <script setup>
-import {convertirADecimal} from '@/composables/conversiones_numericas.js'
+import { convertirADecimal } from "@/composables/conversiones_numericas.js";
 
 const array = new Array(8).fill(0);
 const num1 = ref([...array]);
@@ -98,14 +104,21 @@ function restaBinaria(array1, array2) {
 
 function multiplicacionBinaria(array1, array2) {
   let a1 = [...array1];
-  a1 = a1.slice(a1.findIndex(v => v!= 0));
+  a1 = a1.slice(a1.findIndex((v) => v != 0));
   let a2 = [...array2];
-  a2 = a2.slice(a2.findIndex(v => v!= 0));
-
+  a2 = a2.slice(a2.findIndex((v) => v != 0));
   
+  let multRes = new Array(a2.length).fill(0);
+  let column = [];
+  a1.forEach(v1 => column.push(a2.map(v2 => v2 * v1)));
 
-  const multRes = [];
+  multRes = sumaBinaria(multRes, column[0]);
+  for(let i = 0; i < column.length; i++) {
+    //Hacer el unshift de todo el array colum para los ceos a la derecha
+  }
 
+  console.log(column[0], multRes);
+  
   return multRes;
 }
 
@@ -149,7 +162,7 @@ function operar(array1, array2, operador) {
     }
   }
 
-  &__entrada {
+  &__entrada { 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -167,6 +180,7 @@ function operar(array1, array2, operador) {
     }
 
     &__box {
+      display: flex;
       position: relative;
       transition: top 0.1s ease, left 0.1s ease;
       left: 0;
@@ -187,5 +201,30 @@ function operar(array1, array2, operador) {
   &__salida {
     margin-top: 1rem;
   }
+}
+
+.shadow-red {
+  border-radius: 10px;
+  background-color: transparent;
+  -webkit-box-shadow: 0px 0px 24px 3px rgba(255, 0, 0, 1);
+  -moz-box-shadow: 0px 0px 24px 3px rgba(255, 0, 0, 1);
+  box-shadow: 0px 0px 24px 3px rgba(255, 0, 0, 1);
+}
+
+.shadow-blue {
+  border-radius: 10px;
+  background-color: transparent;
+  -webkit-box-shadow: 0px 0px 24px 3px rgba(0, 17, 255, 1);
+  -moz-box-shadow: 0px 0px 24px 3px rgba(0, 17, 255, 1);
+  box-shadow: 0px 0px 24px 3px rgba(0, 17, 255, 1);
+}
+
+.index {
+  z-index: 1;
+}
+
+.text-on {
+  //text-shadow: 0px 0px 14px #11CE03;
+  text-shadow: 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18, 0px 0px 19px rgba(17,206,3,0);
 }
 </style>

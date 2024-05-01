@@ -32,7 +32,7 @@ const links = [{
     to:"/conversiones",
 	icon:"i-heroicons-arrow-path-rounded-square"
 },{
-	label:"Multiplicación Binaria",
+	label:"Operaciones Binaria",
 	to:"/multiplicacion",
 	icon:"i-heroicons-calculator"
 },{
