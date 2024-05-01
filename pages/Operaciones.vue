@@ -100,7 +100,6 @@ function sumaBinaria(array1, array2) {
   resSum.push(carry);
   return resSum.reverse();
 }
-
 //Resta binaria usando compuertas lóicas de electrónica
 function restaBinaria(array1, array2) {
   const resRes = [];
@@ -122,7 +121,6 @@ function restaBinaria(array1, array2) {
   }
   return resRes;
 }
-
 //Multiplicación Binaria entre dos números
 function multiplicacionBinaria(array1, array2) {
   let a1 = [...array1];

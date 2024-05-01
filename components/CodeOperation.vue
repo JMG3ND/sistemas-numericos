@@ -6,6 +6,11 @@
       </template>
 
       <template #resta="{ items }">
+        <div style="padding: 1rem; border-radius: 10px">
+          Profe, no puse restricción para cuando el sustraendo es mayor que el
+          minuendo, así que si intenta hacer la resta le saldrán resultados
+          extraños. PD: Por ahí lo arreglo.
+        </div>
         <img class="img" src="/public/Resta-Binaria.png" />
       </template>
 
