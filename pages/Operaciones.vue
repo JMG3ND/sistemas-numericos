@@ -4,8 +4,8 @@
     <UCard class="card">
       <template #header>
         <div class="card__header">
-          <Box>N<sub>10</sub> →</Box>
           <div class="card__header__decresult">
+            <Box>N<sub>10</sub> →</Box>
             <Box class="shadow-red"
               >{{ convertirADecimal(num1.join(""), 2) }}<sub>10</sub></Box
             >

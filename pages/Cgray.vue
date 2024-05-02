@@ -4,8 +4,8 @@
     <UCard class="card">
       <template #header>
         <div class="card__header">
-          <Box>N<sub>10</sub> →</Box>
           <div class="card__header__decresult">
+            <Box>N<sub>10</sub> →</Box>
             <Box>{{ convertirADecimal(num1.join(""), 2) }}<sub>10</sub></Box>
           </div>
           <UButton @click="isOpen = !isOpen">Código</UButton>
@@ -34,7 +34,7 @@
       </div>
     </UCard>
     <UModal v-model="isOpen">
-      <img style="border-radius: 10px;" src="">
+      <img style="border-radius: 10px;" src="/public/Codigo-Gray.png">
     </UModal>
   </div>
 </template>
