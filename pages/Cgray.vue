@@ -8,6 +8,7 @@
           <div class="card__header__decresult">
             <Box>{{ convertirADecimal(num1.join(""), 2) }}<sub>10</sub></Box>
           </div>
+          <UButton @click="isOpen = !isOpen">Código</UButton>
         </div>
       </template>
       <div class="card__container">
@@ -28,18 +29,23 @@
           </div>
         </div>
         <div class="card__salida">
-          <Box>{{ result }}</Box>
+          <Box>Código GRAY: {{ result }}</Box>
         </div>
       </div>
     </UCard>
+    <UModal v-model="isOpen">
+      <img style="border-radius: 10px;" src="">
+    </UModal>
   </div>
 </template>
 
 <script setup>
+const isOpen = ref(false);
 const num1 = ref(new Array(8).fill(0));
 const alternar = (array, i) => (array[i] = !array[i] * 1);
 const result = computed(() => cgray([...num1.value]))
 
+//Código que calcula el código gray de un número binario
 const XOR = (A, B) => (A && !B) || (!A && B);
 function cgray (array) {
   let res = [array[0]];

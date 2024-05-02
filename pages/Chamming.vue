@@ -4,11 +4,13 @@
     <UCard class="card">
       <template #header>
         <div class="card__header">
+          <Box>Hamming (7,4)</Box>
           <UButton @click="isOpen = !isOpen">Código</UButton>
         </div>
       </template>
       <div class="card__container">
         <div class="card__entrada">
+          <Box>Información →</Box>
           <div class="card__entrada__num">
             <UTooltip
               v-for="(num, i) in num1"
@@ -25,14 +27,24 @@
           </div>
         </div>
         <div class="card__salida">
-          <div v-for="num in result">
-            <Box>{{ num }}</Box>
+          <Box>Resultado</Box>
+          <div class="card__salida__resultado">
+            <Box>p<sub>0</sub></Box>
+            <Box>p<sub>1</sub></Box>
+            <Box>{{ num1[0] }}</Box>
+            <Box>p<sub>2</sub></Box>
+            <Box>{{ num1[1] }}</Box>
+            <Box>{{ num1[2] }}</Box>
+            <Box>{{ num1[3] }}</Box>
+          </div>
+          <div class="card__salida__resultado">
+            <Box v-for="num in result" >{{ num }}</Box>
           </div>
         </div>
       </div>
     </UCard>
     <UModal v-model="isOpen">
-      <img src="" />
+      <img style="border-radius: 10px;" src="/public/Codigo-Hamming.png" />
     </UModal>
   </div>
 </template>
@@ -71,6 +83,7 @@ function calcular(array) {
 
   return res.join("");
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -88,7 +101,7 @@ function calcular(array) {
 
   &__header {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
     &__decresult {
       display: flex;
@@ -97,8 +110,8 @@ function calcular(array) {
 
   &__entrada {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     gap: 1rem;
 
     &__num {
@@ -134,7 +147,14 @@ function calcular(array) {
 
   &__salida {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    gap: 1rem;
+
+    &__resultado {
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 
