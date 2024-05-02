@@ -2,7 +2,7 @@
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-<code>
+<pre>
 //Suma Binaria usando compuertas lógicas de circuitos
 const XOR = (A, B) => (A && !B) || (!A && B);
 function sumaBinaria(array1, array2) {
@@ -19,7 +19,7 @@ function sumaBinaria(array1, array2) {
   resSum.push(carry);
   return resSum.reverse();
 }
-</code>
+</pre>
 
 ## Setup
 
