@@ -82,7 +82,7 @@ const isDark = computed({
 
 <style lang="scss" >
 a {
-  margin: 1rem;
+  margin-left: 1rem;
 }
 
 *,
