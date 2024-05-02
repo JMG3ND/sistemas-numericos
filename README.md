@@ -1,9 +1,14 @@
-# Nuxt 3 Minimal Starter
+# Parcial 1 - Circuito Lógico
+---
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+[Link del sitio web](https://sistemas-numericos.netlify.app/)
 
-<pre>
-//Suma Binaria usando compuertas lógicas de circuitos
+---
+
+## Código de operaciones binarias.
+### Método sumador binario de dos números.
+Utiliza lógica binaria de circuitos para realizar las operaciones.
+```js
 const XOR = (A, B) => (A && !B) || (!A && B);
 function sumaBinaria(array1, array2) {
   const resSum = [];
@@ -19,76 +24,68 @@ function sumaBinaria(array1, array2) {
   resSum.push(carry);
   return resSum.reverse();
 }
-</pre>
-
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
+### Método restador binario.
+Utilza lógica binaria de circuitos para realizar las operacioes.
+```js
+function restaBinaria(array1, array2) {
+  const resRes = [];
+  let C = 0;
+  let a1 = [...array1];
+  let a2 = [...array2];
+  const index = a1.findIndex((v) => v != 0);
+  a1 = a1.slice(index);
+  a2 = a2.slice(index);
 
-Start the development server on `http://localhost:3000`:
+  for (let i = a1.length - 1; i >= 0; i--) {
+    const A = a1[i];
+    const B = a2[i];
 
-```bash
-# npm
-npm run dev
+    const D = XOR(XOR(A, B), C);
+    C = (!XOR(A, B) && C) || (!A && B);
 
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+    resRes.unshift(D * 1);
+  }
+  return resRes;
+}
 ```
 
-## Production
+### Método multiplcador binario.
+Utiliza lógica biaria y hace referencia al métdo sumador binario para realizar la suma luego de la multiplcación
+```js
+function multiplicacionBinaria(array1, array2) {
+  let a1 = [...array1];
+  a1 = a1.slice(a1.findIndex((v) => v != 0));
+  let a2 = [...array2];
+  a2 = a2.slice(a2.findIndex((v) => v != 0));
 
-Build the application for production:
+  let multRes = new Array(a2.length).fill(0);
+  let column = [];
+  a1.forEach((v1) => column.push(a2.map((v2) => v2 * v1)));
+  column.reverse();
+  multRes = sumaBinaria(multRes, column[0]);
 
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+  for (let i = 1; i < column.length; i++) {
+    column = column.map((v) => {
+      v.push(0);
+      return v;
+    });
+    multRes = sumaBinaria(multRes, column[i]);
+  }
+  return multRes;
+}
 ```
 
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+### Código de división binaria
+Utiliza un método de conversión binaria para hacer las operaiciones de división con los números decimales
+```js
+const dec1 = convertirADecimal(array1.join(""), 2);
+const dec2 = convertirADecimal(array2.join(""), 2);
+if (dec2 == 0) {
+num2.value[num2.value.length - 1] = 1;
+break;
+}
+const decres = Math.floor(dec1 / dec2);
+respuesta = convertirABase(decres, 2).split("");
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
