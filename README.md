@@ -2,6 +2,25 @@
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
+<code>
+//Suma Binaria usando compuertas lógicas de circuitos
+const XOR = (A, B) => (A && !B) || (!A && B);
+function sumaBinaria(array1, array2) {
+  const resSum = [];
+  let carry = 0;
+
+  for (let i = array1.length - 1; i >= 0; i--) {
+    const A = array1[i];
+    const B = array2[i];
+    const F = XOR(XOR(A, B), carry); // F = (AB' + A'B) + C
+    carry = (XOR(A, B) && carry) || (A && B); // carry = (AB' + A'B)C + AB
+    resSum.push(F * 1);
+  }
+  resSum.push(carry);
+  return resSum.reverse();
+}
+</code>
+
 ## Setup
 
 Make sure to install the dependencies:
