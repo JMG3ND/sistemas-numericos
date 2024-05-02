@@ -64,6 +64,7 @@ function sumaBinaria(array1, array2) {
 Utilza lógica binaria de circuitos para realizar las operacioes.
 
 ```js
+const XOR = (A, B) => (A && !B) || (!A && B);
 function restaBinaria(array1, array2) {
   const resRes = [];
   let C = 0;
