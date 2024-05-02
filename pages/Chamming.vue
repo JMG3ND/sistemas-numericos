@@ -44,6 +44,7 @@
       </div>
     </UCard>
     <UModal v-model="isOpen">
+      <a href="https://github.com/JMG3ND/sistemas-numericos?tab=readme-ov-file#c%C3%B3digo-hamming-74">Código GitHub</a>
       <img style="border-radius: 10px;" src="/public/Codigo-Hamming.png" />
     </UModal>
   </div>

@@ -41,6 +41,7 @@
     </UCard>
     <UModal v-model="showModal">
       <div style="padding: 1rem;">
+        <a href="https://github.com/JMG3ND/sistemas-numericos?tab=readme-ov-file#conversiones-entre-sistemas-num%C3%A9ricos">Código GitHub</a>
         <img style="border-radius: 10px;" src="/public/codigo-conversiones.png" />
       </div>
     </UModal>

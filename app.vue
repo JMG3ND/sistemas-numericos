@@ -80,7 +80,11 @@ const isDark = computed({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
+a {
+  margin: 1rem;
+}
+
 *,
 *::after,
 *::before {
