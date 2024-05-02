@@ -62,7 +62,7 @@ const links = [
     icon: "i-heroicons-code-bracket-square",
   },
   {
-    label: "Código Haming",
+    label: "Código Hamming",
     to: "/Chamming",
     icon: "i-heroicons-code-bracket-square",
   },

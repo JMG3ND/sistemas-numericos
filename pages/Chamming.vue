@@ -2,12 +2,17 @@
   <div>
     <h1 class="header">Código Hamming</h1>
     <UCard class="card">
+      <template #header>
+        <div class="card__header">
+          <UButton @click="isOpen = !isOpen">Código</UButton>
+        </div>
+      </template>
       <div class="card__container">
         <div class="card__entrada">
           <div class="card__entrada__num">
             <UTooltip
-              :text="Math.pow(2, num1.length - i - 1).toString()"
               v-for="(num, i) in num1"
+              :text="Math.pow(2, num1.length - i - 1).toString()"
             >
               <div
                 @click="alternar(num1, i)"
@@ -20,18 +25,25 @@
           </div>
         </div>
         <div class="card__salida">
-          <Box>{{ result }}<sub>2</sub></Box>
+          <div v-for="num in result">
+            <Box>{{ num }}</Box>
+          </div>
         </div>
       </div>
     </UCard>
+    <UModal v-model="isOpen">
+      <img src="" />
+    </UModal>
   </div>
 </template>
 
 <script setup>
+const isOpen = ref(false);
 const num1 = ref(new Array(4).fill(0));
 const alternar = (array, i) => (array[i] = !array[i] * 1);
 const result = computed(() => calcular([...num1.value]));
 
+//Función que calcula el resultado del código Hamming
 function calcular(array) {
   let res = new Array(7).fill(1);
   res[0] = 0;
@@ -39,25 +51,25 @@ function calcular(array) {
   res[3] = 0;
 
   let x = 0;
-  res.forEach((v, i) => v ? res[i] = array[x++] : 0);
-  let p1 = 0, p2 = 0, p3 = 0;
-  res.forEach((v, i) => !(i % 2) ? p1 += v : 0);
+  res.forEach((v, i) => (v ? (res[i] = array[x++]) : 0));
+  let p1 = 0,
+    p2 = 0,
+    p3 = 0;
+  res.forEach((v, i) => (!(i % 2) ? (p1 += v) : 0));
 
-  for(let i = 1; i < res.length; i+=4) {
+  for (let i = 1; i < res.length; i += 4) {
     p2 += res[i] + res[i + 1];
   }
 
-  for(let i = 3; i < res.length; i+=8) {
+  for (let i = 3; i < res.length; i += 8) {
     p2 += res[i] + res[i + 1] + res[i + 2] + res[i + 3];
   }
-
 
   res[0] = p1 % 2;
   res[1] = p2 % 2;
   res[3] = p3 % 2;
 
-
-  return res.join('');
+  return res.join("");
 }
 </script>
 
@@ -76,7 +88,7 @@ function calcular(array) {
 
   &__header {
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
     &__decresult {
       display: flex;
@@ -118,6 +130,11 @@ function calcular(array) {
         top: 0;
       }
     }
+  }
+
+  &__salida {
+    display: flex;
+    justify-content: center;
   }
 }
 

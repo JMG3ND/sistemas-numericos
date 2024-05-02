@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="card__salida">
-          <Box>{{ result }}<sub>2</sub></Box>
+          <Box>{{ result }}</Box>
         </div>
       </div>
     </UCard>
