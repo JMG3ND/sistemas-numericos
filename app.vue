@@ -1,29 +1,31 @@
 <template>
   <div class="screen">
     <aside>
-      <div class="head">
-        <div class="name">
-          <UAvatar
-            src="https://avatars.githubusercontent.com/u/63263243?v=4"
-            alt="José Gutiérrez"
-            size="lg"
+      <div class="aside">
+        <div class="head">
+          <div class="name">
+            <UAvatar
+              src="https://avatars.githubusercontent.com/u/63263243?v=4"
+              alt="José Gutiérrez"
+              size="lg"
+            />
+            <a href="https://github.com/JMG3ND"><h1>José Gutiérez</h1></a>
+          </div>
+          <UButton
+            :icon="
+              dark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'
+            "
+            color="gray"
+            variant="ghost"
+            aria-label="Theme"
+            @click="
+              isDark = !isDark;
+              dark = !dark;
+            "
           />
-          <a href="https://github.com/JMG3ND"><h1>José Gutiérez</h1></a>
         </div>
-        <UButton
-          :icon="
-            dark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'
-          "
-          color="gray"
-          variant="ghost"
-          aria-label="Theme"
-          @click="
-            isDark = !isDark;
-            dark = !dark;
-          "
-        />
+        <UVerticalNavigation :links="links" />
       </div>
-      <UVerticalNavigation :links="links" />
     </aside>
     <main>
       <NuxtPage />
@@ -102,7 +104,7 @@ main {
   height: 100%;
 }
 
-aside {
+.aside {
   position: sticky;
   top: 20px;
 }
