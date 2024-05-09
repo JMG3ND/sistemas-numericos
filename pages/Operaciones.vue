@@ -106,7 +106,7 @@ function restaBinaria(array1, array2) {
   let C = 0;
   let a1 = [...array1];
   let a2 = [...array2];
-  const index = a1.findIndex((v) => v != 0);
+  const index = a1.findIndex(1);
   a1 = a1.slice(index);
   a2 = a2.slice(index);
 
@@ -124,9 +124,9 @@ function restaBinaria(array1, array2) {
 //Multiplicación Binaria entre dos números
 function multiplicacionBinaria(array1, array2) {
   let a1 = [...array1];
-  a1 = a1.slice(a1.findIndex((v) => v != 0));
+  a1 = a1.slice(a1.findIndex(1));
   let a2 = [...array2];
-  a2 = a2.slice(a2.findIndex((v) => v != 0));
+  a2 = a2.slice(a2.findIndex(1));
 
   let multRes = new Array(a2.length).fill(0);
   let column = [];
@@ -169,7 +169,7 @@ function operar(array1, array2, operador) {
       respuesta = convertirABase(decres, 2).split("");
   }
   
-  return respuesta.slice(respuesta.findIndex((v) => v !== 0)).join("");
+  return respuesta.slice(respuesta.indexOf(1)).join("");
 }
 </script>
 
