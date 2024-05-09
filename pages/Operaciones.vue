@@ -166,7 +166,7 @@ function operar(array1, array2, operador) {
         break;
       }
       const decres = Math.floor(dec1 / dec2);
-      respuesta = convertirABase(decres, 2).split("");
+      respuesta = convertirABase(decres, 2).split("").map(v => Number(v));
   }
   
   return respuesta.slice(respuesta.indexOf(1)).join("");
