@@ -197,10 +197,12 @@ function operar(array1, array2, operador) {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 1rem;
 
     &__num {
       display: flex;
+      width: fit-content;
       position: relative;
       gap: 1rem;
     }
